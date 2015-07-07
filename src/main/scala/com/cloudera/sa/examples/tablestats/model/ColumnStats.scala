@@ -19,18 +19,16 @@ class ColumnStats(var nulls:Long = 0l,
     totalCount += colCount
     uniqueValues += 1
 
-    if (colValue == null) {
-      nulls += 1
-    } else if (colValue.isInstanceOf[String]) {
-      val colStringValue = colValue.asInstanceOf[String]
-      if (colStringValue.isEmpty) {
-        empties += 1
-      }
-    } else if (colValue.isInstanceOf[Long]) {
-      val colLongValue = colValue.asInstanceOf[Long]
-      if (maxLong < colLongValue) maxLong = colLongValue
-      if (minLong > colLongValue) minLong = colLongValue
-      sumLong += colLongValue
+    colValue match {
+      case null =>
+        nulls += 1
+      case s: String =>
+        if (s.isEmpty)
+          empties += 1
+      case l: Long =>
+        if (maxLong < l) maxLong = l
+        if (minLong > l) minLong = l
+        sumLong += l
     }
 
     topNValues.add(colValue, colCount)

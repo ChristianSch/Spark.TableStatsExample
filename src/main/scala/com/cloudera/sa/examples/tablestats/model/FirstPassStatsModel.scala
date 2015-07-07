@@ -13,12 +13,12 @@ class FirstPassStatsModel extends Serializable {
   }
 
   def +=(firstPassStatsModel: FirstPassStatsModel): Unit = {
-    firstPassStatsModel.columnStatsMap.foreach{ e =>
-      val columnStats = columnStatsMap.getOrElse(e._1, null)
-      if (columnStats != null) {
-        columnStats += e._2
-      } else {
-        columnStatsMap += ((e._1, e._2))
+    firstPassStatsModel.columnStatsMap.foreach{ case(idx, stats) =>
+      columnStatsMap.get(idx) match {
+        case Some(prevStats) =>
+          prevStats += stats
+        case None =>
+          columnStatsMap(idx) = stats
       }
     }
   }

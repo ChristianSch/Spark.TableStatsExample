@@ -47,7 +47,7 @@ class TestTableStatsSinglePathMain extends FunSuite with BeforeAndAfterEach with
       assertResult(6l)(firstPassStats.columnStatsMap(0).maxLong)
       assertResult(1l)(firstPassStats.columnStatsMap(0).minLong)
       assertResult(21l)(firstPassStats.columnStatsMap(0).sumLong)
-      assertResult(3l)(firstPassStats.columnStatsMap(0).avgLong)
+      assertResult(3.5)(firstPassStats.columnStatsMap(0).avg)
 
       assertResult(2)(firstPassStats.columnStatsMap(3).topNValues.topNCountsForColumnArray.length)
 

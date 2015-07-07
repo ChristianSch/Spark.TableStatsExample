@@ -12,7 +12,7 @@ class ColumnStats(var nulls:Long = 0l,
                   var sumLong:Long = 0l,
                   val topNValues:TopNList = new TopNList(10)) extends Serializable {
 
-  def avgLong: Long = sumLong/totalCount
+  def avg: Double = sumLong / totalCount.toDouble
 
   //Part C.B
   def +=(colValue: Any, colCount: Long): Unit = {
@@ -49,6 +49,6 @@ class ColumnStats(var nulls:Long = 0l,
     }
   }
 
-  override def toString = s"ColumnStats(nulls=$nulls, empties=$empties, totalCount=$totalCount, uniqueValues=$uniqueValues, maxLong=$maxLong, minLong=$minLong, sumLong=$sumLong, topNValues=$topNValues, avgLong=$avgLong)"
+  override def toString = s"ColumnStats(nulls=$nulls, empties=$empties, totalCount=$totalCount, uniqueValues=$uniqueValues, maxLong=$maxLong, minLong=$minLong, sumLong=$sumLong, topNValues=$topNValues, avgLong=$avg)"
 }
 
